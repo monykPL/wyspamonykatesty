@@ -1,62 +1,20 @@
-/* Resetowanie domyślnych marginesów i ustawienie box-sizing */
+/* RESET I PODSTAWA */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Zapobiega wystawaniu elementów poza ekran */
+    box-sizing: border-box;
 }
 
-/* 1. Ustawiamy body tak, żeby zawsze zajmowało 100% wysokości okna */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+html {
+    scroll-behavior: smooth;
 }
-
-/* 2. Zdjęcie (hero) - zostaje jak było */
-.hero {
-    height: 60vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/header.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0; /* Zapobiega zgniataniu zdjęcia */
-}
-
-/* 3. Magiczna poprawka dla czarnego paska */
-.social-bar {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 30px 20px;
-    text-align: center;
-    width: 100%;
-    
-    /* To sprawi, że pasek "urośnie" i wypełni całą pozostałą przestrzeń na dole */
-    flex-grow: 1; 
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centruje napisy w pionie wewnątrz paska */
-}
-
-/* Usuwamy wszelkie białe znaki pod obrazkiem */
-img, header {
-    vertical-align: middle;
-    display: block;
-}
-
-/* Reszta Twoich styli (navbar, logo, slider itp.) zostaje bez zmian */
 
 :root {
     --bg-color: #ffffff;
     --nav-color: #808080;
     --text-color: #000000;
     --nav-text: #ffffff;
+    --about-bg: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -64,18 +22,18 @@ img, header {
     --nav-color: #333333;
     --text-color: #ffffff;
     --nav-text: #dddddd;
+    --about-bg: #000000; /* Tło historii w trybie ciemnym */
 }
 
 body {
-    margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: 0.3s;
+    overflow-x: hidden;
 }
 
-/* Pasek nawigacji */
+/* NAWIGACJA */
 .navbar {
     background-color: var(--nav-color);
     height: 60px;
@@ -84,8 +42,9 @@ body {
     justify-content: space-between;
     padding: 0 20px;
     color: var(--nav-text);
-    position: relative;
-    z-index: 10;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
@@ -101,13 +60,14 @@ body {
     font-weight: 500;
 }
 
-/* --- Sekcja ze zdjęciem (Hero) --- */
+/* ZDJĘCIE (HERO) */
 .hero {
-    height: 60vh; /* Wysokość sekcji - możesz zmienić na np. 80vh jeśli ma być większa */
+    height: 60vh;
     width: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/header.png');
-    background-size: cover; /* Wypełnia całą szerokość i wysokość */
+    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,26 +76,67 @@ body {
 }
 
 .hero-content h1 {
-    font-size: 4rem;
-    margin: 0;
+    font-size: 3.5rem;
     text-transform: uppercase;
     letter-spacing: 5px;
 }
 
-.hero-content p {
-    font-size: 1.5rem;
-    margin: 10px 0;
+/* PASEK SOCIAL MEDIA */
+.social-bar {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
 }
 
-/* Czarny pasek pod napisem */
-.black-bar {
-    width: 100px;
-    height: 5px;
-    background-color: black;
-    margin: 20px auto 0;
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 15px;
 }
 
-/* --- Suwak trybu ciemnego --- */
+.social-links a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fa-tiktok { color: #ff0050; }
+.fa-youtube { color: #ff0000; }
+.fa-github { color: #ffffff; }
+.fa-discord { color: #5865f2; }
+
+/* SEKCJA INFORMACJE (HISTORIA) */
+.about-section {
+    background-color: var(--about-bg);
+    color: var(--text-color);
+    padding: 80px 20px;
+    transition: 0.3s;
+    min-height: 40vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.about-section p {
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* SUWAK (TOGGLE) */
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
@@ -143,114 +144,24 @@ body {
 
 .theme-switch {
     display: inline-block;
-    height: 34px;
+    height: 30px;
     position: relative;
-    width: 60px;
+    width: 55px;
 }
 
-.theme-switch input {
-    display: none;
-}
+.theme-switch input { display: none; }
 
 .slider {
     background-color: #ccc;
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .4s;
-    border-radius: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5px;
+    bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0;
+    transition: .4s; border-radius: 34px;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 5px;
 }
 
 .slider:before {
-    background-color: #fff;
-    bottom: 4px;
-    content: "";
-    height: 26px;
-    left: 4px;
-    position: absolute;
-    transition: .4s;
-    width: 26px;
-    border-radius: 50%;
-    z-index: 2;
+    background-color: #fff; content: ""; height: 22px; width: 22px;
+    left: 4px; bottom: 4px; position: absolute; transition: .4s; border-radius: 50%; z-index: 2;
 }
 
-input:checked + .slider {
-    background-color: #444;
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-.icon {
-    font-size: 14px;
-    user-select: none;
-}
-
-/* ... reszta poprzedniego kodu bez zmian ... */
-
-/* Sekcja Social Media pod zdjęciem */
-.social-bar {
-    background-color: #000000; /* Czarny pasek */
-    color: #ffffff;
-    padding: 30px 20px;
-    text-align: center;
-    width: 100%;
-}
-
-.social-bar h3 {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px; /* Odstępy między ikonami */
-}
-
-.social-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Odstęp ikony od tekstu */
-    transition: 0.3s;
-}
-
-/* Efekt po najechaniu na link - opcjonalnie */
-.social-links a:hover {
-    color: #808080;
-    transform: translateY(-3px);
-}
-
-/* Dostosowanie ikon (kolory marek) */
-.fa-tiktok { color: #ff0050; }
-.fa-youtube { color: #ff0000; }
-.fa-github { color: #f0f6fc; }
-.fa-discord { color: #5865f2; }
-
-/* Poprawka dla Hero, żeby pasował do paska */
-.hero {
-    height: 60vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/header.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
+input:checked + .slider { background-color: #444; }
+input:checked + .slider:before { transform: translateX(25px); }
