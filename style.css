@@ -5,16 +5,16 @@
     box-sizing: border-box; /* Zapobiega wystawaniu elementów poza ekran */
 }
 
+/* 1. Ustawiamy body tak, żeby zawsze zajmowało 100% wysokości okna */
 html, body {
-    width: 100%;
-    overflow-x: hidden; /* Usuwa poziomy pasek przewijania przy oddalaniu */
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
-    transition: 0.3s;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Poprawka dla Hero - żeby zdjęcie nie miało przerw */
+/* 2. Zdjęcie (hero) - zostaje jak było */
 .hero {
     height: 60vh;
     width: 100%;
@@ -25,18 +25,29 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: white;
+    flex-shrink: 0; /* Zapobiega zgniataniu zdjęcia */
 }
 
-/* Sekcja Social Media - usuwamy ewentualne marginesy */
+/* 3. Magiczna poprawka dla czarnego paska */
 .social-bar {
     background-color: #000000;
     color: #ffffff;
     padding: 30px 20px;
     text-align: center;
     width: 100%;
-    display: block; /* Upewnia się, że zajmuje całą linię */
+    
+    /* To sprawi, że pasek "urośnie" i wypełni całą pozostałą przestrzeń na dole */
+    flex-grow: 1; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centruje napisy w pionie wewnątrz paska */
+}
+
+/* Usuwamy wszelkie białe znaki pod obrazkiem */
+img, header {
+    vertical-align: middle;
+    display: block;
 }
 
 /* Reszta Twoich styli (navbar, logo, slider itp.) zostaje bez zmian */
