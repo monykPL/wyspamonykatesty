@@ -1,3 +1,46 @@
+/* Resetowanie domyślnych marginesów i ustawienie box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Zapobiega wystawaniu elementów poza ekran */
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Usuwa poziomy pasek przewijania przy oddalaniu */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    transition: 0.3s;
+}
+
+/* Poprawka dla Hero - żeby zdjęcie nie miało przerw */
+.hero {
+    height: 60vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/header.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* Sekcja Social Media - usuwamy ewentualne marginesy */
+.social-bar {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
+    display: block; /* Upewnia się, że zajmuje całą linię */
+}
+
+/* Reszta Twoich styli (navbar, logo, slider itp.) zostaje bez zmian */
+
 :root {
     --bg-color: #ffffff;
     --nav-color: #808080;
