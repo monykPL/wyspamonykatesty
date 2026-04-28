@@ -139,3 +139,64 @@ input:checked + .slider:before {
     font-size: 14px;
     user-select: none;
 }
+
+/* ... reszta poprzedniego kodu bez zmian ... */
+
+/* Sekcja Social Media pod zdjęciem */
+.social-bar {
+    background-color: #000000; /* Czarny pasek */
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.social-bar h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* Odstępy między ikonami */
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Odstęp ikony od tekstu */
+    transition: 0.3s;
+}
+
+/* Efekt po najechaniu na link - opcjonalnie */
+.social-links a:hover {
+    color: #808080;
+    transform: translateY(-3px);
+}
+
+/* Dostosowanie ikon (kolory marek) */
+.fa-tiktok { color: #ff0050; }
+.fa-youtube { color: #ff0000; }
+.fa-github { color: #f0f6fc; }
+.fa-discord { color: #5865f2; }
+
+/* Poprawka dla Hero, żeby pasował do paska */
+.hero {
+    height: 60vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/header.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
