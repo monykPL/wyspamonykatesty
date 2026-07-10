@@ -1,4 +1,3 @@
-/* RESET I PODSTAWA */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +13,7 @@ html {
     --nav-color: #808080;
     --text-color: #000000;
     --nav-text: #ffffff;
-    --accent-color: #ff0050; /* Kolor linków w dziełach */
+    --accent-color: #ff0050;
 }
 
 [data-theme="dark"] {
@@ -35,7 +34,6 @@ body {
     flex-direction: column;
 }
 
-/* NAWIGACJA */
 .navbar {
     background-color: var(--nav-color);
     height: 60px;
@@ -62,7 +60,6 @@ body {
     font-weight: 500;
 }
 
-/* ZDJĘCIE (HERO) */
 .hero {
     height: 60vh;
     width: 100%;
@@ -85,7 +82,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* PASEK SOCIAL MEDIA */
 .social-bar {
     background-color: #000000;
     color: #ffffff;
@@ -118,7 +114,6 @@ body {
 .fa-github { color: #ffffff; }
 .fa-discord { color: #5865f2; }
 
-/* SEKCJE WSPÓLNE (Historia i Dzieła) */
 .about-section, .works-section {
     padding: 80px 20px;
     transition: 0.3s;
@@ -126,9 +121,9 @@ body {
 }
 
 .works-section {
-    background-color: var(--bg-color); /* To samo tło co reszta strony */
-    border-top: 1px solid rgba(128, 128, 128, 0.2); /* Delikatna linia oddzielająca */
-    flex-grow: 1; /* Wypełnia dół strony */
+    background-color: var(--bg-color);
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+    flex-grow: 1;
 }
 
 .container {
@@ -150,7 +145,10 @@ p {
     font-size: 1.1rem;
 }
 
-/* LINK DO DZIEŁA */
+.work-item {
+    margin-bottom: 30px;
+}
+
 .work-link {
     color: var(--accent-color);
     text-decoration: underline;
@@ -163,7 +161,6 @@ p {
     text-decoration: none;
 }
 
-/* SUWAK (TOGGLE) */
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
