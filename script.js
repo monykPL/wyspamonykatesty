@@ -12,14 +12,12 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme);
 
-// Kolor logo zależny od godziny
 function updateLogoColor() {
     const hour = new Date().getHours();
-    // Noc: 20:00 - 06:00
     if (hour >= 20 || hour < 6) {
-        logo.style.color = "#cccccc"; // Ciemny biały
+        logo.style.color = "#cccccc";
     } else {
-        logo.style.color = "#ffffff"; // Biały
+        logo.style.color = "#ffffff";
     }
 }
 
