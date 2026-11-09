@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="dark"> <head>
+<html lang="pl" data-theme="dark">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WyspaMonyka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Tiny5&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo" id="dynamicLogo">WyspaMonyka</div>
+        <a href="#" class="logo" id="dynamicLogo">WyspaMonyka 💻</a>
         
         <div class="nav-links">
             <a href="#">Strona Główna</a>
@@ -17,15 +21,10 @@
             <a href="#dziela">Dzieła</a>
         </div>
 
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" checked />
-                <div class="slider">
-                    <span class="icon sun">☀️</span>
-                    <span class="icon moon">🌙</span>
-                </div>
-            </label>
-        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Przełącz tryb">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+        </button>
     </nav>
 
     <header class="hero">
@@ -36,42 +35,71 @@
     </header>
 
     <section class="social-bar">
-        <h3>Social Media</h3>
-        <div class="social-links">
-            <a href="https://www.tiktok.com/@monyk_pl" target="_blank"><i class="fa-brands fa-tiktok"></i> Tiktok: monyk_pl</a>
-            <a href="https://www.youtube.com/@monyk_PL" target="_blank"><i class="fa-brands fa-youtube"></i> Youtube: monyk_PL</a>
-            <a href="https://github.com/monykPL" target="_blank"><i class="fa-brands fa-github"></i> Github: monykPL</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-discord"></i> Discord: monykpl</a>
+        <div class="container flex-socials">
+            <a href="https://www.tiktok.com/@monyk_pl" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i> Tiktok: <span>monyk_pl</span></a>
+            <a href="https://www.youtube.com/@monyk_PL" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Youtube: <span>monyk_PL</span></a>
+            <a href="https://github.com/monykPL" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Github: <span>monykPL</span></a>
+            <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord: <span>monykpl</span></a>
         </div>
     </section>
 
-    <section id="informacje" class="about-section">
-        <div class="container">
+    <main class="container">
+        <section id="informacje" class="card-section">
             <h2>Historia</h2>
-            <p>
+            <p class="story-text">
                 Witam jestem monykPL mam 21lat nie śmiało publikuje swój głos i twarz na sociale może to się potem zmieni, moje hobby od dzieciaka było robić swoje gry na kartridże lub na dyskietki ale po kilku latach już wycofało się to i były płyty, strony, sklepy itp. ale marzenie dalej te same na youtube oglądałem dużo youtuberów i moje drugie marzenie jakby tamte nie udało się to zostać popularnym youtuberem i właśnie po kilku latach w 2019 wstawiłem swój pierwszy filmik który teraz jest prywatny i tamte konto usunięte bo zawierało moje imię w nazwie ale potem odkryłem że to zło i nie mogę tak robić bo ludzie będą znać moich rodziców kuzynów i tym podobne (itp.) miałem przerwę od tych sociali ale po długim trochę czasie powróciłem na youtube wstawiając mój pierwszy filmik na drugim kanale który powstał 4 czerwca 2023 roku jak dostałem po kliku dniach tysiąc wyświetleń pod nim bardzo byłem ucieszony bo nigdy takiej liczby nie widziałem za ten widziałem na youtube/tiktok ludzie robiące gameplay i nawet grałem w te gry porzuciłem nagrywanie przez to poszedłem na robienie gier/programowanie z początku robiłem w roblox na LUA uczyłem się poradników z youtube zbytnio nie umiałem po kilku nie udanych problemach udało się pierwszy kod trenowałem dalej i umiem do tej pory ale nie robię już na rolox gier przez ten surowy regulamin na temat publikowania więc przeniosłem się na jakieś inne silniki typu JavaScript, C#, CSS, HTML itp.
             </p>
-        </div>
-    </section>
+        </section>
 
-    <section id="dziela" class="works-section">
-        <div class="container">
+        <section id="dziela" class="card-section">
             <h2>Dzieła</h2>
             
-            <div class="work-item">
+            <article class="project-card">
+                <div class="project-header">
+                    <h3>1. <a href="https://monykpl.github.io/barka-licznik/" target="_blank" class="project-link">Licznik Papieskiej</a></h3>
+                    <span class="badge" id="papalBadge">21:37 Auto-Trigger</span>
+                </div>
                 <p>
-                    1. <a href="https://monykpl.github.io/barka-licznik/" target="_blank" class="work-link">Licznik Papieskiej</a> - Strona gdzie jest licznik do godziny 21:37 z czatem i trybem imprezowym gdzie czat się resetuje co godzinę a impreza podczas barki robi migające światło więc osoby z epilepsją nie odpalać tego oraz jak wybije ta godzina 21:37 tło zmienia się z szarego na żółte i leci konfetti po bokach ekranu a w tle leci barka remix wykop pl po tej piosence tło zmienia na szare z powrotem i znika konfetti robi następnego dnia jak wybije 21:37 to samo.
+                    Strona gdzie jest licznik do godziny 21:37 z czatem i trybem imprezowym gdzie czat się resetuje co godzinę a impreza podczas barki robi migające światło więc osoby z epilepsją nie odpalać tego oraz jak wybije ta godzina 21:37 tło zmienia się z szarego na żółte i leci konfetti po bokach ekranu a w tle leci barka remix wykop pl po tej piosence tło zmienia na szare z powrotem i znika konfetti robi następnego dnia jak wybije 21:37 to samo.
                 </p>
-            </div>
+            </article>
 
-            <div class="work-item">
+            <article class="project-card">
+                <div class="project-header">
+                    <h3>2. <a href="https://monykpl.github.io/MelonClient/" target="_blank" class="project-link">MelonClient</a></h3>
+                    <span class="badge beta">BETA</span>
+                    <div class="warning-tooltip">
+                        ✕
+                        <span class="tooltip-text">nie działa są przerwy techniczne. Przepraszamy za problemy. ale i tak chyba usunę ten projekt bądz ciekawy</span>
+                    </div>
+                </div>
                 <p>
-                    2. <a href="https://monykpl.github.io/MelonClient/" target="_blank" class="work-link">MelonClient</a> - Strona mojego własnego clienta minecraft MelonClient jest w fazie Beta ale da się korzystać z niego staram się go optymalizować najmocniej jak mogę żeby był najlepszym darmowym clientem pod FPS próbuje wyścignąć innych ale nie wiem czy mi się uda jeśli chcecie mnie wesprzeć możecie wejść na serwer discord który znajdzecie w zakładce "Social Media"
+                    Strona mojego własnego clienta minecraft MelonClient jest w fazie Beta ale da się korzystać z niego staram się go optymalizować najmocniej jak mogę żeby był najlepszym darmowym clientem pod FPS próbuje wyścignąć innych ale nie wiem czy mi się uda jeśli chcecie mnie wesprzeć możecie wejść na serwer discord który znajdzecie w zakładce "Social Media".
                 </p>
-            </div>
+                <div class="btn-group">
+                    <a href="https://monykpl.github.io/MelonClient/" target="_blank" class="btn btn-primary"><i class="fa-brands fa-windows"></i> Windows</a>
+                    <a href="https://monykpl.github.io/MelonClient/" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-linux"></i> Linux</a>
+                </div>
+            </article>
 
-        </div>
-    </section>
+            <article class="project-card" id="stickyNotesProject" style="display: none;">
+                <div class="project-header">
+                    <h3>3. <a href="https://monykpl.github.io/Sticky-Notes/" target="_blank" class="project-link sticky-trigger">Sticky Notes</a></h3>
+                    <span class="badge alpha">ALPHA</span>
+                </div>
+                <p>
+                    Sticky Notes - alternatywa dla notatnika/sticky notes od microsoftu. Z lepszymi funkcjami i dopracowaniem mniejsze zużycie ramu i innych zasobów z customizacją niektórych funkcji nie ma bo jest w fazie alpha i są czasem błędy zgłoś je na serwer discord link w moich socialach na stronie po więcej info zajżyj stronę aplikacji.
+                </p>
+                <div class="btn-group">
+                    <a href="https://monykpl.github.io/Sticky-Notes/" target="_blank" class="btn btn-primary sticky-trigger"><i class="fa-solid fa-note-sticky"></i> Otwórz aplikację</a>
+                </div>
+            </article>
+
+            <div id="timerBanner" class="timer-banner">
+                <span id="timerText">Wkrótce (Sticky Notes): Ładowanie...</span>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
