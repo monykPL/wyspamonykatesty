@@ -7,7 +7,7 @@ const releaseLabel = document.getElementById("releaseLabel");
 const releaseCountdown = document.getElementById("releaseCountdown");
 
 const STICKY_NOTES_URL = "https://monykpl.github.io/Sticky-Notes/";
-const STICKY_NOTES_RELEASE_AT = new Date("2026-11-10T11:34:13+01:00").getTime();
+const STICKY_NOTES_RELEASE_AT = Date.now() + 20 * 1000;
 
 let stickyNotesReleased = false;
 let confettiStarted = false;
