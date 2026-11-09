@@ -1,121 +1,120 @@
-const toggleSwitch = document.querySelector('#checkbox');
-const logo = document.getElementById('dynamicLogo');
-const stickyNotesProject = document.getElementById('stickyNotesProject');
-const timerBanner = document.getElementById('timerBanner');
-const timerText = document.getElementById('timerText');
+const toggleSwitch = document.querySelector("#checkbox");
+const logo = document.getElementById("dynamicLogo");
+const stickyWork = document.getElementById("stickyNotesWork");
+const stickySelected = document.getElementById("stickyNotesSelected");
+const releaseButton = document.getElementById("stickyReleaseButton");
+const releaseLabel = document.getElementById("releaseLabel");
+const releaseCountdown = document.getElementById("releaseCountdown");
 
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-    }    
+const STICKY_NOTES_URL = "https://monykpl.github.io/Sticky-Notes/";
+const STICKY_NOTES_RELEASE_AT = new Date("2026-11-10T11:34:13+01:00").getTime();
+
+let stickyNotesReleased = false;
+let confettiStarted = false;
+
+function switchTheme(event) {
+    document.documentElement.setAttribute("data-theme", event.target.checked ? "dark" : "light");
 }
 
-const savedTheme = localStorage.getItem('theme') || 'dark';
-if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    toggleSwitch.checked = false;
-} else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleSwitch.checked = true;
+if (toggleSwitch) {
+    toggleSwitch.addEventListener("change", switchTheme);
 }
-
-toggleSwitch.addEventListener('change', switchTheme);
 
 function updateLogoColor() {
+    if (!logo) return;
     const hour = new Date().getHours();
-    if (logo) {
-        logo.style.color = (hour >= 20 || hour < 6) ? '#cccccc' : '#ffffff';
-    }
+    logo.style.color = hour >= 20 || hour < 6 ? "#cccccc" : "#ffffff";
 }
 
-const DURATION_24H = 24 * 60 * 60 * 1000;
-let endTime = localStorage.getItem('stickyNotesEndTime');
-
-if (!endTime) {
-    endTime = Date.now() + DURATION_24H;
-    localStorage.setItem('stickyNotesEndTime', endTime);
-} else {
-    endTime = parseInt(endTime, 10);
+function formatCountdown(milliseconds) {
+    const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return [hours, minutes, seconds].map(value => String(value).padStart(2, "0")).join(":");
 }
 
-function updateTimer() {
-    const now = Date.now();
-    const distance = endTime - now;
-
-    if (distance <= 0) {
-        stickyNotesProject.style.display = 'block';
-        timerBanner.classList.add('released');
-        timerText.textContent = "Wydano: Sticky Notes! (Kliknij tutaj, aby otworzyć)";
-        timerBanner.style.cursor = 'pointer';
-        timerBanner.onclick = () => {
-            window.open('https://monykpl.github.io/Sticky-Notes/', '_blank');
-        };
-    } else {
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        timerText.textContent = `Wkrótce (Sticky Notes): ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
+function updateStickySelection() {
+    if (!stickyWork || !stickySelected) return;
+    stickyWork.classList.toggle("selected", stickySelected.checked);
 }
 
-function triggerConfetti() {
-    const colors = ['#00f2ea', '#ef4444', '#eab308', '#22c55e', '#ffffff'];
-    const particleCount = 50;
+function launchConfetti() {
+    if (confettiStarted || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    confettiStarted = true;
 
-    function createParticle(x, y) {
-        const el = document.createElement('div');
-        el.style.position = 'fixed';
-        el.style.left = x + 'px';
-        el.style.top = y + 'px';
-        el.style.width = '8px';
-        el.style.height = '8px';
-        el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        el.style.borderRadius = '50%';
-        el.style.pointerEvents = 'none';
-        el.style.zIndex = '99999';
-        document.body.appendChild(el);
+    const colors = ["#e32935", "#ffbd2e", "#00b8d9", "#6bcB77", "#9b5de5", "#ffffff"];
 
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 5 + 2;
-        const vx = Math.cos(angle) * speed;
-        let vy = Math.sin(angle) * speed - 2;
-        let opacity = 1;
+    ["left", "right"].forEach(side => {
+        for (let index = 0; index < 42; index += 1) {
+            const piece = document.createElement("span");
+            const isLeft = side === "left";
+            const drift = isLeft ? 45 + Math.random() * 230 : -(45 + Math.random() * 230);
 
-        const anim = setInterval(() => {
-            const currentLeft = parseFloat(el.style.left);
-            const currentTop = parseFloat(el.style.top);
-            el.style.left = (currentLeft + vx) + 'px';
-            el.style.top = (currentTop + vy) + 'px';
-            vy += 0.2;
-            opacity -= 0.02;
-            el.style.opacity = opacity;
-
-            if (opacity <= 0) {
-                clearInterval(anim);
-                el.remove();
-            }
-        }, 20);
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(20, 20);
-        createParticle(window.innerWidth - 20, 20);
-    }
-}
-
-document.querySelectorAll('.sticky-trigger').forEach(el => {
-    el.addEventListener('click', () => {
-        triggerConfetti();
+            piece.className = "confetti-piece";
+            piece.style.left = isLeft
+                ? Math.random() * 7 + "vw"
+                : 93 + Math.random() * 7 + "vw";
+            piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.width = 5 + Math.random() * 6 + "px";
+            piece.style.height = 8 + Math.random() * 10 + "px";
+            piece.style.animationDelay = Math.random() * 0.9 + "s";
+            piece.style.setProperty("--drift", drift + "px");
+            document.body.appendChild(piece);
+            window.setTimeout(() => piece.remove(), 6000);
+        }
     });
-});
+}
+
+function publishStickyNotes() {
+    if (stickyNotesReleased) return;
+    stickyNotesReleased = true;
+
+    if (stickyWork) stickyWork.hidden = false;
+    if (releaseButton) releaseButton.disabled = false;
+    if (releaseLabel) releaseLabel.textContent = "Wydano: Sticky Notes";
+    if (releaseCountdown) releaseCountdown.textContent = "";
+
+    updateStickySelection();
+    launchConfetti();
+}
+
+function updateReleaseCountdown() {
+    const remaining = STICKY_NOTES_RELEASE_AT - Date.now();
+
+    if (remaining <= 0) {
+        publishStickyNotes();
+        return;
+    }
+
+    if (releaseCountdown) {
+        releaseCountdown.textContent = formatCountdown(remaining);
+    }
+}
+
+if (stickySelected) {
+    stickySelected.addEventListener("change", updateStickySelection);
+}
+
+if (releaseButton) {
+    releaseButton.addEventListener("click", () => {
+        if (!stickyNotesReleased || Date.now() < STICKY_NOTES_RELEASE_AT) return;
+
+        if (stickySelected) {
+            stickySelected.checked = true;
+            updateStickySelection();
+        }
+
+        window.open(STICKY_NOTES_URL, "_blank", "noopener,noreferrer");
+    });
+}
 
 updateLogoColor();
-updateTimer();
+window.setInterval(updateLogoColor, 60000);
 
-setInterval(updateLogoColor, 60000);
-setInterval(updateTimer, 1000);
+if (Date.now() >= STICKY_NOTES_RELEASE_AT) {
+    publishStickyNotes();
+} else {
+    updateReleaseCountdown();
+    window.setInterval(updateReleaseCountdown, 1000);
+}
